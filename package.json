@@ -1,0 +1,28 @@
+{
+    "name": "attendance-tracking-system",
+    "type": "module",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "tailwindcss": "npx tailwindcss -i ./public/styles/input.css -o ./public/styles/output.css --watch",
+        "nodemon": "nodemon index.js",
+        "dev": "concurrently \"npm run tailwindcss\" \"npm run nodemon"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "autoprefixer": "^10.4.19",
+        "cookie-parser": "^1.4.6",
+        "ejs": "^3.1.10",
+        "express": "^4.19.2",
+        "express-ejs-layouts": "^2.5.1",
+        "jsonwebtoken": "^9.0.2",
+        "postcss": "^8.4.38",
+        "tailwindcss": "^3.4.3"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2",
+        "nodemon": "^3.1.0"
+    }
+}

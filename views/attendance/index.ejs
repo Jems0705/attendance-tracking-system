@@ -1,0 +1,65 @@
+<div>
+    <h1 class="text-xl">Attendance</h1>
+    <div id="qrScanner"></div>
+</div>
+
+<script>
+    console.log("document", window);
+    function onScanSuccess(decodedText, decodedResult) {
+        // handle the scanned code as you like, for example:
+        console.log(`Code matched = ${decodedText}`, decodedResult);
+    }
+
+    function onScanFailure(error) {
+        // handle scan failure, usually better to ignore and keep scanning.
+        // for example:
+        // console.warn(`Code scan error = ${error}`);
+    }
+
+    const scanner = new Html5QrcodeScanner(
+        "qrScanner",
+        { fps: 10, qrbox: { width: "100%", height: "100%" } },
+        false
+    );
+
+    const id = Html5Qrcode.getCameras()
+        .then((devices) => {
+            console.log("devices", devices);
+            /**
+             * devices would be an array of objects of type:
+             * { id: "id", label: "label" }
+             */
+            if (devices && devices.length) {
+                var cameraId = devices[0].id;
+                // .. use this to start scanning.
+
+                scanner
+                    .start(
+                        cameraId,
+                        {
+                            fps: 10, // Optional, frame per seconds for qr code scanning
+                            qrbox: { width: 250, height: 250 }, // Optional, if you want bounded box UI
+                        },
+                        (decodedText, decodedResult) => {
+                            console.log("data", decodedResult, decodedText);
+                            // do something when code is read
+                        },
+                        (errorMessage) => {
+                            // parse error, ignore it.
+                        }
+                    )
+                    .catch((err) => {
+                        // Start failed, handle it.
+                    });
+            }
+        })
+        .catch((err) => {
+            // handle err
+        });
+
+    console.log("id");
+
+    console.log("scanner", scanner);
+
+    scanner.render(onScanSuccess, onScanFailure);
+</script>
