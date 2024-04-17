@@ -1,8 +1,15 @@
 import express from "express";
-import { getAttendance } from "../controllers/attendanceController.js";
+import {
+    getTimeRecords,
+    getAttendance,
+} from "../controllers/attendanceController.js";
+import { verifyJWT } from "../middlewares/verifyJWT.js";
 
 const router = express.Router();
 
-router.get("/", getAttendance);
+router.use(verifyJWT);
+
+router.get("/time-records", getTimeRecords);
+router.get("/scan", getAttendance);
 
 export default router;

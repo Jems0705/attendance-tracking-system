@@ -1,3 +1,10 @@
+const getTimeRecords = (req, res) => {
+    res.render("attendance/timeRecords", {
+        pageTitle: "Time Records",
+        layout: "layouts/layout",
+    });
+};
+
 const getAttendance = (req, res) => {
     res.render("attendance/index", {
         pageTitle: "Attendance",
@@ -5,4 +12,4 @@ const getAttendance = (req, res) => {
     });
 };
 
-export { getAttendance };
+export { getTimeRecords, getAttendance };
